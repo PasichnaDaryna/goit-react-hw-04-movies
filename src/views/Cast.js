@@ -1,67 +1,82 @@
-import PageHeading from '../components/PageHeading/PageHeading';
+import { useState, useEffect } from 'react';
 
-function Cast() {
+import { Route, useRouteMatch } from 'react-router-dom';
+
+import * as filmsAPI from '../services/films-api';
+import { POSTER_URL } from '../services/films-api';
+import PageHeading from '../components/PageHeading/PageHeading';
+import AuthorSubView from './AuthorSubView';
+
+// export default function Cast({ movieId }) {
+//   const [authors, setAuhors] = useState([]);
+
+//   useEffect(() => {
+//     fetchMovieCast(movieId).then(request => setAuhors(request.authors));
+//   }, [movieId]);
+
+//  return (
+//     <>
+//       {authors && (
+//         <>
+//           <ul >
+//             {authors.map(author => (
+//               <>
+//                 {author.profile_path && (
+//                   <li key={author.profile_path} >
+//                     <img
+//                       src={POSTER_URL + author.profile_path}
+//                       alt={author.name}
+//                       widht="100"
+//                       height="150"
+//                     />
+//                     <p> {author.name}</p>
+//                   </li>
+//                 )}
+//               </>
+//             ))}
+//           </ul>
+//         </>
+//       )}
+//     </>
+//   );
+// }
+
+// Cast.propTypes = {
+//   movieId: PropTypes.string.isRequired,
+// };
+
+export default function Cast() {
+  const { path } = useRouteMatch();
+  const [authors, setAuhors] = useState([]);
+
+  useEffect(() => {
+    filmsAPI.fetchMovieCast().then(request => setAuhors(request.authors));
+  }, []);
+
   return (
     <>
-      <PageHeading text="Cast" />
+      <PageHeading text="Авторы" />
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
+      {authors && (
+        <ul>
+          {authors.map(author => (
+            <li key={author.profile_path}>
+              <img
+                src={POSTER_URL + author.profile_path}
+                alt={author.name}
+                widht="100"
+                height="150"
+              />
+              <p> {author.name}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <hr />
+      {/* 
+      <Route path={`${path}/:authorId`}>
+        {authors && <AuthorSubView authors={authors} />}
+      </Route> */}
     </>
   );
 }
-
-export default Cast;

@@ -17,21 +17,27 @@ export function fetchTrendingMovies() {
   return fetchWithErrorHandling(TREND_URL);
 }
 
-// async function fetchWithErrorHandling(url = '', config = {}) {
-//   const response = await fetch(url, config);
-//   return response.ok
-//     ? await response.json()
-//     : Promise.reject(new Error('Not found'));
-// }
+export function fetchMoviesByName(name) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${name}&language=en-US&page=1&include_adult=false`,
+  );
+}
 
-// export function fetchAuthors() {
-//   return fetchWithErrorHandling(`${BASE_URL}/authors?_embed=books`);
-// }
+export function fetchMovieDetails(id) {
+  console.log(id);
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`,
+  );
+}
 
-// export function fetchBooks() {
-//   return fetchWithErrorHandling(`${BASE_URL}/books`);
-// }
+export function fetchMovieCast(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`,
+  );
+}
 
-// export function fetchBookById(bookId) {
-//   return fetchWithErrorHandling(`${BASE_URL}/books/${bookId}?_expand=author`);
-// }
+export function fetchMovieReviews(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`,
+  );
+}

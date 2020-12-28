@@ -17,21 +17,20 @@ export default function App() {
         <Route path="/" exact>
           <HomeView />
         </Route>
-
-        <Route path="/movies" exact>
-          <MoviesPage />
-        </Route>
-
-        <Route path="/movies/:movieId" exact>
-          <MovieDetailsPage />
+        <Route path="/movies/:movieId/reviews">
+          <Reviews />
         </Route>
 
         <Route path="/movies/:movieId/cast">
           <Cast />
         </Route>
 
-        <Route path="/movies/:movieId/reviews">
-          <Reviews />
+        <Route path="/movies/:movieId" exact>
+          <MovieDetailsPage />
+        </Route>
+
+        <Route path="/movies">
+          <MoviesPage />
         </Route>
 
         <Route>
