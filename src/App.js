@@ -4,8 +4,8 @@ import Container from './components/Container/Container';
 import HomeView from './views/HomeView';
 import MovieDetailsPage from './views/MovieDetailsPage';
 import MoviesPage from './views/MoviesPage';
-import Cast from './views/Cast';
-import Reviews from './views/Reviews';
+// import Cast from './views/Cast';
+// import Reviews from './views/Reviews';
 import NotFoundView from './views/NotFoundView';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
     <Container>
       <AppBar />
 
-      <Switch>
+      {/* <Switch>
         <Route path="/" exact>
           <HomeView />
         </Route>
@@ -33,6 +33,22 @@ export default function App() {
           <MoviesPage />
         </Route>
 
+        <Route>
+          <NotFoundView />
+        </Route>
+      </Switch> */}
+
+      <Switch>
+        <Route path="/" exact>
+          <HomeView />
+        </Route>
+        <Route path="/movies" exact>
+          <MoviesPage />
+        </Route>
+
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage />
+        </Route>
         <Route>
           <NotFoundView />
         </Route>

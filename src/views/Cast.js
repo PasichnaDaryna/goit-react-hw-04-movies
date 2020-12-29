@@ -1,82 +1,41 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { fetchMovieCast, POSTER_URL } from '../services/films-api';
 
-import { Route, useRouteMatch } from 'react-router-dom';
-
-import * as filmsAPI from '../services/films-api';
-import { POSTER_URL } from '../services/films-api';
-import PageHeading from '../components/PageHeading/PageHeading';
-import AuthorSubView from './AuthorSubView';
-
-// export default function Cast({ movieId }) {
-//   const [authors, setAuhors] = useState([]);
-
-//   useEffect(() => {
-//     fetchMovieCast(movieId).then(request => setAuhors(request.authors));
-//   }, [movieId]);
-
-//  return (
-//     <>
-//       {authors && (
-//         <>
-//           <ul >
-//             {authors.map(author => (
-//               <>
-//                 {author.profile_path && (
-//                   <li key={author.profile_path} >
-//                     <img
-//                       src={POSTER_URL + author.profile_path}
-//                       alt={author.name}
-//                       widht="100"
-//                       height="150"
-//                     />
-//                     <p> {author.name}</p>
-//                   </li>
-//                 )}
-//               </>
-//             ))}
-//           </ul>
-//         </>
-//       )}
-//     </>
-//   );
-// }
-
-// Cast.propTypes = {
-//   movieId: PropTypes.string.isRequired,
-// };
-
-export default function Cast() {
-  const { path } = useRouteMatch();
-  const [authors, setAuhors] = useState([]);
+export default function Cast({ movieId }) {
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    filmsAPI.fetchMovieCast().then(request => setAuhors(request.authors));
-  }, []);
+    fetchMovieCast(movieId).then(request => setCast(request.cast));
+  }, [movieId]);
 
   return (
     <>
-      <PageHeading text="Авторы" />
-
-      {authors && (
-        <ul>
-          {authors.map(author => (
-            <li key={author.profile_path}>
-              <img
-                src={POSTER_URL + author.profile_path}
-                alt={author.name}
-                widht="100"
-                height="150"
-              />
-              <p> {author.name}</p>
-            </li>
-          ))}
-        </ul>
+      {cast && (
+        <>
+          <ul>
+            {cast.map(item => (
+              <>
+                {item.profile_path && (
+                  <li key={item.profile_path}>
+                    <img
+                      src={POSTER_URL + item.profile_path}
+                      alt={item.name}
+                      widht="100"
+                      height="150"
+                    />
+                    <p> {item.name}</p>
+                  </li>
+                )}
+              </>
+            ))}
+          </ul>
+        </>
       )}
-      <hr />
-      {/* 
-      <Route path={`${path}/:authorId`}>
-        {authors && <AuthorSubView authors={authors} />}
-      </Route> */}
     </>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};
