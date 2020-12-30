@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { fetchMovieCast, POSTER_URL } from '../services/films-api';
+import { fetchMovieCast, POSTER_URL } from '../../services/films-api';
+import './Cast.css';
 
 export default function Cast({ movieId }) {
   const [cast, setCast] = useState([]);
@@ -13,11 +14,11 @@ export default function Cast({ movieId }) {
     <>
       {cast && (
         <>
-          <ul>
+          <ul className="cast-list">
             {cast.map(item => (
               <>
                 {item.profile_path && (
-                  <li key={item.profile_path}>
+                  <li key={item.profile_path} className="list__element">
                     <img
                       src={POSTER_URL + item.profile_path}
                       alt={item.name}
