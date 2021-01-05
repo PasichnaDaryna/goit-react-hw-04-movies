@@ -45,7 +45,7 @@ export default function HomeView() {
             <ul className="data-container">
               {films.map(film => (
                 <>
-                  {film.poster_path && (
+                  {
                     <li key={film.id} className="list__element">
                       <Link to={`${url}movies/${film.id}`}>
                         <img
@@ -57,7 +57,7 @@ export default function HomeView() {
                         <p className="element__name">{film.title}</p>
                       </Link>
                     </li>
-                  )}
+                  }
                 </>
               ))}
             </ul>

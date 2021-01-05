@@ -10,7 +10,7 @@ function MoviesPage({ films }) {
       {films.map(film => (
         <>
           {film.poster_path && (
-            <li className="list__element" key={film.id}>
+            <li key={film.id} className="list__element">
               <Link to={`${url}/${film.id}`}>
                 <img
                   src={POSTER_URL + film.poster_path}
