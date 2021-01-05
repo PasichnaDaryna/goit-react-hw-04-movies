@@ -44,21 +44,17 @@ export default function HomeView() {
             <p className="heading-name">Trending today</p>
             <ul className="data-container">
               {films.map(film => (
-                <>
-                  {
-                    <li key={film.id} className="list__element">
-                      <Link to={`${url}movies/${film.id}`}>
-                        <img
-                          src={POSTER_URL + film.poster_path}
-                          alt={film.title}
-                          width="300"
-                          height="450"
-                        />
-                        <p className="element__name">{film.title}</p>
-                      </Link>
-                    </li>
-                  }
-                </>
+                <li key={film.id} className="list__element">
+                  <Link to={`${url}movies/${film.id}`}>
+                    <img
+                      src={POSTER_URL + film.poster_path}
+                      alt={film.title}
+                      width="300"
+                      height="450"
+                    />
+                    <p className="element__name">{film.title}</p>
+                  </Link>
+                </li>
               ))}
             </ul>
           </>

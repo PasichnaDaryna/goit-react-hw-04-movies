@@ -8,21 +8,17 @@ function MoviesPage({ films }) {
   return (
     <ul className="data-container">
       {films.map(film => (
-        <>
-          {film.poster_path && (
-            <li key={film.id} className="list__element">
-              <Link to={`${url}/${film.id}`}>
-                <img
-                  src={POSTER_URL + film.poster_path}
-                  alt={film.title}
-                  width="300"
-                  height="450"
-                />
-                <p>{film.title}</p>
-              </Link>
-            </li>
-          )}
-        </>
+        <li key={film.id} className="list__element">
+          <Link to={`${url}/${film.id}`}>
+            <img
+              src={POSTER_URL + film.poster_path}
+              alt={film.title}
+              width="300"
+              height="450"
+            />
+            <p>{film.title}</p>
+          </Link>
+        </li>
       ))}
     </ul>
   );
