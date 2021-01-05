@@ -1,40 +1,35 @@
-import { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import * as filmsAPI from '../../services/films-api';
-
+import PropTypes from 'prop-types';
 import { POSTER_URL } from '../../services/films-api';
-import PageHeading from '../../components/PageHeading/PageHeading';
-import './MoviesPage.css';
 
-export default function MoviesPage() {
+function MoviesPage({ films }) {
   const { url } = useRouteMatch();
-  const [movies, setMovies] = useState(null);
-
-  useEffect(() => {
-    filmsAPI.fetchTrendingMovies().then(request => setMovies(request.results));
-  }, []);
 
   return (
-    <>
-      <PageHeading text="Movies" />
-
-      {movies && (
-        <ul className="data-container">
-          {movies.map(movie => (
-            <li className="list__element" key={movie.id}>
-              <Link to={`${url}/${movie.id}`}>
+    <ul className="data-container">
+      {films.map(film => (
+        <>
+          {film.poster_path && (
+            <li className="list__element" key={film.id}>
+              <Link to={`${url}/${film.id}`}>
                 <img
-                  src={POSTER_URL + movie.poster_path}
-                  alt={movie.title}
+                  src={POSTER_URL + film.poster_path}
+                  alt={film.title}
                   width="300"
                   height="450"
                 />
-                <p>{movie.title}</p>
+                <p>{film.title}</p>
               </Link>
             </li>
-          ))}
-        </ul>
-      )}
-    </>
+          )}
+        </>
+      ))}
+    </ul>
   );
 }
+
+MoviesPage.propTypes = {
+  images: PropTypes.array,
+};
+
+export default MoviesPage;

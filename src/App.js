@@ -10,12 +10,13 @@ import Container from './components/Container/Container';
 // import NotFoundView from './views/FilmErrorView';
 import FilmPendingView from './views/FilmPendingView/FilmPendingView';
 import { ToastContainer } from 'react-toastify';
+// import FilmsPage from './views/FilmsPage';
 
 const HomeView = lazy(() =>
   import('./views/HomeView/HomeView' /* webpackChunkName: "HomePage" */),
 );
-const MoviesPage = lazy(() =>
-  import('./views/MoviesPage/MoviesPage' /* webpackChunkName: "MoviesPage" */),
+const FilmsPage = lazy(() =>
+  import('./views/FilmsPage/FilmsPage' /* webpackChunkName: "MoviesPage" */),
 );
 const NotFoundView = lazy(() =>
   import(
@@ -38,7 +39,7 @@ export default function App() {
             <HomeView />
           </Route>
           <Route path="/movies" exact>
-            <MoviesPage />
+            <FilmsPage />
           </Route>
 
           <Route path="/movies/:movieId">
